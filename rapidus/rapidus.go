@@ -24,6 +24,11 @@ func (r *Rapidus) New(rootPath string) error {
 		return err
 	}
 
+	err = r.checkDotEnv(rootPath)
+	if err != nil {
+		return err
+	}
+
 	// read .env
 	err = godotenv.Load(rootPath + "/.env")
 	if err != nil {
