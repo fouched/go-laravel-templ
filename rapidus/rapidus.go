@@ -1,5 +1,10 @@
 package rapidus
 
+import (
+	"fmt"
+	"github.com/joho/godotenv"
+)
+
 const version = "1.0.0"
 
 type Rapidus struct {
@@ -19,6 +24,12 @@ func (r *Rapidus) New(rootPath string) error {
 		return err
 	}
 
+	// read .env
+	err = godotenv.Load(rootPath + "/.env")
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -32,5 +43,13 @@ func (r *Rapidus) Init(p initPaths) error {
 		}
 	}
 
+	return nil
+}
+
+func (r *Rapidus) checkDotEnv(path string) error {
+	err := r.CreateFileIfNotExist(fmt.Sprintf("%s/.env", path))
+	if err != nil {
+		return err
+	}
 	return nil
 }

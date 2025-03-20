@@ -13,3 +13,20 @@ func (r *Rapidus) CreateDirIfNotExist(path string) error {
 
 	return nil
 }
+
+func (r *Rapidus) CreateFileIfNotExist(path string) error {
+	// could also inline below, just showing the normal way
+	var _, err = os.Stat(path)
+	if os.IsNotExist(err) {
+		var file, err = os.Create(path)
+		if err != nil {
+			return err
+		}
+
+		defer func(file *os.File) {
+			_ = file.Close()
+		}(file)
+	}
+
+	return nil
+}
