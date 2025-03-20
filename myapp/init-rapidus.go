@@ -20,7 +20,7 @@ func initApplication() *application {
 	}
 
 	rap.AppName = "myapp"
-	rap.Debug = true
+	rap.InfoLog.Println("Debug is set to", rap.Debug)
 
 	app := &application{
 		App: rap,
