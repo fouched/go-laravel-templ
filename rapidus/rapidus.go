@@ -17,6 +17,12 @@ type Rapidus struct {
 	ErrorLog *log.Logger
 	InfoLog  *log.Logger
 	RootPath string
+	config   config // no reason to export this
+}
+
+type config struct {
+	port     string
+	renderer string
 }
 
 func (r *Rapidus) New(rootPath string) error {
@@ -47,6 +53,12 @@ func (r *Rapidus) New(rootPath string) error {
 	r.ErrorLog = errorLog
 	r.Debug, _ = strconv.ParseBool(os.Getenv("DEBUG"))
 	r.Version = version
+	r.RootPath = rootPath
+
+	r.config = config{
+		port:     os.Getenv("PORT"),
+		renderer: os.Getenv("RENDERER"),
+	}
 
 	return nil
 }
