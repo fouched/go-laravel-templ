@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/fouched/rapidus"
 	"log"
+	"myapp/handlers"
 	"os"
 )
 
@@ -12,7 +13,7 @@ func initApplication() *application {
 		log.Fatal(err)
 	}
 
-	// init celeritas
+	// init rapidus
 	rap := &rapidus.Rapidus{}
 	err = rap.New(path)
 	if err != nil {
@@ -20,11 +21,16 @@ func initApplication() *application {
 	}
 
 	rap.AppName = "myapp"
-	rap.InfoLog.Println("Debug is set to", rap.Debug)
+
+	myHandlers := &handlers.Handlers{App: rap}
 
 	app := &application{
-		App: rap,
+		App:      rap,
+		Handlers: myHandlers,
 	}
+
+	// set application routes to rapidus routes
+	app.App.Routes = app.routes()
 
 	return app
 }

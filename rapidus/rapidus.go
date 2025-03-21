@@ -2,10 +2,13 @@ package rapidus
 
 import (
 	"fmt"
+	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
+	"time"
 )
 
 const version = "1.0.0"
@@ -17,6 +20,7 @@ type Rapidus struct {
 	ErrorLog *log.Logger
 	InfoLog  *log.Logger
 	RootPath string
+	Routes   *chi.Mux
 	config   config // no reason to export this
 }
 
@@ -54,6 +58,7 @@ func (r *Rapidus) New(rootPath string) error {
 	r.Debug, _ = strconv.ParseBool(os.Getenv("DEBUG"))
 	r.Version = version
 	r.RootPath = rootPath
+	r.Routes = r.routes().(*chi.Mux)
 
 	r.config = config{
 		port:     os.Getenv("PORT"),
@@ -74,6 +79,21 @@ func (r *Rapidus) Init(p initPaths) error {
 	}
 
 	return nil
+}
+
+func (r *Rapidus) ListenAndServe() {
+	srv := &http.Server{
+		Addr:         fmt.Sprintf(":%s", os.Getenv("PORT")),
+		ErrorLog:     r.ErrorLog,
+		Handler:      r.Routes,
+		IdleTimeout:  30 * time.Second,
+		ReadTimeout:  30 * time.Second,
+		WriteTimeout: 600 * time.Second,
+	}
+
+	r.InfoLog.Printf("Listening on port %s", os.Getenv("PORT"))
+	err := srv.ListenAndServe()
+	r.ErrorLog.Fatal(err)
 }
 
 func (r *Rapidus) checkDotEnv(path string) error {

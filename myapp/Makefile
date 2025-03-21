@@ -5,6 +5,7 @@ SHELL=cmd.exe
 build:
 # 	can use vendor below for local copy, but that is only really required in VS Code...
 #    @go mod vendor
+	@templ generate
 	@go build -o tmp/${BINARY_NAME} .
 	@echo Rapidus built!
 
