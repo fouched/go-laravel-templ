@@ -24,6 +24,7 @@ type Rapidus struct {
 	RootPath string
 	Routes   *chi.Mux
 	Session  *scs.SessionManager
+	DB       Database
 	config   config // no reason to export this
 }
 
@@ -32,6 +33,7 @@ type config struct {
 	renderer    string
 	cookie      cookieConfig
 	sessionType string
+	database    databaseConfig
 }
 
 func (r *Rapidus) New(rootPath string) error {
@@ -64,6 +66,20 @@ func (r *Rapidus) New(rootPath string) error {
 	r.Version = version
 	r.RootPath = rootPath
 	r.Routes = r.routes().(*chi.Mux)
+
+	// connect to database if specified
+	if os.Getenv("DATABASE_TYPE") != "" {
+		db, err := r.OpenDB(os.Getenv("DATABASE_TYPE"), r.BuildDSN())
+		//TODO: build in retry
+		if err != nil {
+			errorLog.Println(err)
+			os.Exit(1)
+		}
+		r.DB = Database{
+			Type: os.Getenv("DATABASE_TYPE"),
+			Pool: db,
+		}
+	}
 
 	// setup config
 	r.config = config{
@@ -137,4 +153,24 @@ func (r *Rapidus) startLoggers() (*log.Logger, *log.Logger) {
 	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	return infoLog, errorLog
+}
+
+func (r *Rapidus) BuildDSN() string {
+	var dsn string
+
+	switch os.Getenv("DATABASE_TYPE") {
+	case "postgres", "postgresql":
+		dsn = fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=%s timezone=UTC connect_timeout=5",
+			os.Getenv("DATABASE_HOST"),
+			os.Getenv("DATABASE_PORT"),
+			os.Getenv("DATABASE_USER"),
+			os.Getenv("DATABASE_NAME"),
+			os.Getenv("DATABASE_SSL_MODE"),
+		)
+		if os.Getenv("DATABASE_PASS") != "" {
+			dsn = fmt.Sprintf("%s password=%s", dsn, os.Getenv("DATABASE_PASS"))
+		}
+	}
+
+	return dsn
 }
