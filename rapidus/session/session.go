@@ -36,7 +36,7 @@ func (s *Session) InitSession() *scs.SessionManager {
 	session := scs.New()
 	session.Lifetime = time.Duration(minutes) * time.Minute
 	session.Cookie.Persist = persist
-	session.Cookie.Name = s.CookieDomain
+	session.Cookie.Name = s.CookieName
 	session.Cookie.Secure = secure
 	session.Cookie.Domain = s.CookieDomain
 	session.Cookie.SameSite = http.SameSiteLaxMode

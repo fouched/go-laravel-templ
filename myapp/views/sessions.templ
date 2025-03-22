@@ -2,20 +2,16 @@ package views
 
 import "myapp/views/layouts"
 
-templ Home() {
-    @layouts.Base("Home") {
+templ Sessions(sessionValue string) {
+    @layouts.Base("Sessions") {
         <div class="col text-center">
             <div class="d-flex align-items-center justify-content-center mt-5">
                 <div>
                     <img src="/public/images/rapidus.jpg" class="mb-5" style="width: 100px;height:auto;">
                     <h1>Rapidus</h1>
                     <hr>
-                    <small class="text-muted">Go build something awesome</small>
+                    <small class="text-muted">This value came from the session: {sessionValue}</small>
                 </div>
-            </div>
-            <p class="mt-5">Things to try:</p>
-            <div class="list-group">
-                <a href="/sessions" class="list-group-item list-group-item-action">Try Sessions</a>
             </div>
         </div>
     }

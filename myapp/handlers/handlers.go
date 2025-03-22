@@ -18,3 +18,16 @@ func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
 		h.App.ErrorLog.Println("error rendering:", err)
 	}
 }
+
+func (h *Handlers) SessionTest(w http.ResponseWriter, r *http.Request) {
+	myData := "bar"
+	h.App.Session.Put(r.Context(), "foo", myData)
+
+	myValue := h.App.Session.GetString(r.Context(), "foo")
+
+	t := views.Sessions(myValue)
+	err := render.Template(w, r, t)
+	if err != nil {
+		h.App.ErrorLog.Println("error rendering:", err)
+	}
+}

@@ -8,14 +8,18 @@ import (
 
 func (r *Rapidus) routes() http.Handler {
 	mux := chi.NewRouter()
+	addMiddleware(mux, r)
 
+	return mux
+}
+
+func addMiddleware(mux *chi.Mux, r *Rapidus) {
 	mux.Use(middleware.RequestID)
 	mux.Use(middleware.RealIP)
 	mux.Use(middleware.Recoverer)
+	//if r.Debug {
+	//	mux.Use(middleware.Logger)
+	//}
 
-	if r.Debug {
-		mux.Use(middleware.Logger)
-	}
-
-	return mux
+	mux.Use(r.SessionLoad)
 }

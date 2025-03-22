@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "myapp/views/layouts"
 
-func Home() templ.Component {
+func Sessions(sessionValue string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -43,13 +43,26 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">Go build something awesome</small></div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">This value came from the session: ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 string
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(sessionValue)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/sessions.templ`, Line: 13, Col: 93}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</small></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Home").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Sessions").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
