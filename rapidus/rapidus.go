@@ -2,6 +2,8 @@ package rapidus
 
 import (
 	"fmt"
+	"github.com/alexedwards/scs/v2"
+	"github.com/fouched/rapidus/session"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
 	"log"
@@ -21,12 +23,15 @@ type Rapidus struct {
 	InfoLog  *log.Logger
 	RootPath string
 	Routes   *chi.Mux
+	Session  *scs.SessionManager
 	config   config // no reason to export this
 }
 
 type config struct {
-	port     string
-	renderer string
+	port        string
+	renderer    string
+	cookie      cookieConfig
+	sessionType string
 }
 
 func (r *Rapidus) New(rootPath string) error {
@@ -60,10 +65,30 @@ func (r *Rapidus) New(rootPath string) error {
 	r.RootPath = rootPath
 	r.Routes = r.routes().(*chi.Mux)
 
+	// setup config
 	r.config = config{
 		port:     os.Getenv("PORT"),
-		renderer: os.Getenv("RENDERER"),
+		renderer: os.Getenv("RENDERER"), // we probably don't need this with templ
+		cookie: cookieConfig{
+			name:     os.Getenv("COOKIE_NAME"),
+			lifetime: os.Getenv("COOKIE_LIFETIME"),
+			persist:  os.Getenv("COOKIE_PERSIST"),
+			secure:   os.Getenv("COOKIE_SECURE"),
+			domain:   os.Getenv("COOKIE_DOMAIN"),
+		},
+		sessionType: os.Getenv("SESSION_TYPE"),
 	}
+
+	// create session
+	s := session.Session{
+		CookieLifetime: r.config.cookie.lifetime,
+		CookiePersist:  r.config.cookie.persist,
+		CookieSecure:   r.config.cookie.secure,
+		CookieName:     r.config.cookie.name,
+		CookieDomain:   r.config.cookie.domain,
+		SessionType:    r.config.sessionType,
+	}
+	r.Session = s.InitSession()
 
 	return nil
 }

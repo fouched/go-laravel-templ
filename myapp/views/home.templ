@@ -1,7 +1,9 @@
 package views
 
+import "myapp/views/layouts"
+
 templ Home() {
-    @Layout("Home") {
+    @layouts.Base("Home") {
         <div class="col text-center">
             <br><br>
             <p class="mt-5">Things to try:</p>
