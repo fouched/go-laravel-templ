@@ -93,6 +93,10 @@ func (r *Rapidus) New(rootPath string) error {
 			domain:   os.Getenv("COOKIE_DOMAIN"),
 		},
 		sessionType: os.Getenv("SESSION_TYPE"),
+		database: databaseConfig{
+			dsn:      r.BuildDSN(),
+			database: os.Getenv("DATABASE_TYPE"),
+		},
 	}
 
 	// create session
@@ -131,6 +135,8 @@ func (r *Rapidus) ListenAndServe() {
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 600 * time.Second,
 	}
+
+	defer r.DB.Pool.Close()
 
 	r.InfoLog.Printf("Listening on port %s", os.Getenv("PORT"))
 	err := srv.ListenAndServe()
