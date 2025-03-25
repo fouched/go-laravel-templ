@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/fouched/rapidus"
 	"log"
+	"myapp/data"
 	"myapp/handlers"
 	"os"
 )
@@ -31,6 +32,7 @@ func initApplication() *application {
 
 	// set application routes to rapidus routes
 	app.App.Routes = app.routes()
+	app.Models = data.New(app.App.DB.Pool)
 
 	return app
 }

@@ -43,7 +43,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">Go build something awesome</small></div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" alt=\"logo\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">Go build something awesome</small></div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
