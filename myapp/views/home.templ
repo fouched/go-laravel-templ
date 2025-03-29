@@ -2,7 +2,7 @@ package views
 
 import "myapp/views/layouts"
 
-templ Home() {
+templ Home(isAuthenticated bool) {
     @layouts.Base("Home") {
         <div class="col text-center">
             <div class="d-flex align-items-center justify-content-center mt-5">
@@ -11,11 +11,16 @@ templ Home() {
                     <h1>Rapidus</h1>
                     <hr>
                     <small class="text-muted">Go build something awesome</small>
+                    if isAuthenticated {
+                        <br>
+                        <small><a href="/users/logout">Logout</a></small>
+                    }
                 </div>
             </div>
             <p class="mt-5">Things to try:</p>
             <div class="list-group">
                 <a href="/sessions" class="list-group-item list-group-item-action">Try Sessions</a>
+                <a href="/users/login" class="list-group-item list-group-item-action">Login a user</a>
             </div>
         </div>
     }

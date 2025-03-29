@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "myapp/views/layouts"
 
-func Home() templ.Component {
+func Home(isAuthenticated bool) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -43,7 +43,17 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" alt=\"logo\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">Go build something awesome</small></div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" alt=\"logo\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">Go build something awesome</small> ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if isAuthenticated {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<br><small><a href=\"/users/logout\">Logout</a></small>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a> <a href=\"/users/login\" class=\"list-group-item list-group-item-action\">Login a user</a></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

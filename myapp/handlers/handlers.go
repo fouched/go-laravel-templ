@@ -3,16 +3,21 @@ package handlers
 import (
 	"github.com/fouched/rapidus"
 	"github.com/fouched/rapidus/render"
+	"myapp/data"
 	"myapp/views"
 	"net/http"
 )
 
 type Handlers struct {
-	App *rapidus.Rapidus
+	App    *rapidus.Rapidus
+	Models data.Models
 }
 
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
-	t := views.Home()
+
+	userID := h.App.Session.GetInt(r.Context(), "userID")
+	isAuthenticated := userID != 0
+	t := views.Home(isAuthenticated)
 	err := render.Template(w, r, t)
 	if err != nil {
 		h.App.ErrorLog.Println("error rendering:", err)
