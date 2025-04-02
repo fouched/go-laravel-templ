@@ -16,7 +16,7 @@ type Token struct {
 	UserID    int       `db:"user_id" json:"user_id"`
 	FirstName string    `db:"first_name" json:"first_name"`
 	Email     string    `db:"email" json:"email"`
-	PlainText string    `db:"-" json:"plain_text"`
+	PlainText string    `db:"token" json:"plain_text"`
 	Hash      []byte    `db:"token_hash" json:"-"`
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
@@ -45,7 +45,7 @@ func (t *Token) GetUserForToken(token string) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
-	u.Token = &theToken
+	u.Token = theToken
 
 	return &u, nil
 }
