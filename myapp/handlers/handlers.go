@@ -14,7 +14,6 @@ type Handlers struct {
 }
 
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
-
 	userID := h.App.Session.GetInt(r.Context(), "userID")
 	isAuthenticated := userID != 0
 	t := views.Home(isAuthenticated)

@@ -7,7 +7,6 @@ import (
 )
 
 func (h *Handlers) UserLoginGet(w http.ResponseWriter, r *http.Request) {
-
 	t := views.Login()
 	err := render.Template(w, r, t)
 	if err != nil {
@@ -16,7 +15,6 @@ func (h *Handlers) UserLoginGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) UserLoginPost(w http.ResponseWriter, r *http.Request) {
-
 	err := r.ParseForm()
 	if err != nil {
 		h.App.ErrorLog.Println(err.Error())
@@ -48,7 +46,6 @@ func (h *Handlers) UserLoginPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) LogOut(w http.ResponseWriter, r *http.Request) {
-
 	h.App.Session.RenewToken(r.Context())
 	h.App.Session.Remove(r.Context(), "userID")
 
