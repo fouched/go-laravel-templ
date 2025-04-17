@@ -10,14 +10,14 @@ const (
 )
 
 // RandomString generates a random string of length n
-func (c *Rapidus) RandomString(n int) string {
+func (r *Rapidus) RandomString(n int) string {
 
-	s, r := make([]rune, n), []rune(randomString)
+	s, t := make([]rune, n), []rune(randomString)
 
 	for i := range s {
-		p, _ := rand.Prime(rand.Reader, len(r))
-		x, y := p.Uint64(), uint64(len(r))
-		s[i] = r[x%y]
+		p, _ := rand.Prime(rand.Reader, len(t))
+		x, y := p.Uint64(), uint64(len(t))
+		s[i] = t[x%y]
 	}
 	return string(s)
 }
