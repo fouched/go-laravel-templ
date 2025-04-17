@@ -3,6 +3,11 @@ package rapidus
 import (
 	"github.com/golang-migrate/migrate/v4"
 	"log"
+
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 func (r *Rapidus) MigrateUp(dsn string) error {
