@@ -14,7 +14,7 @@ func doMake(arg2, arg3 string) error {
 	case "migration":
 		dbType := rap.DB.Type
 		if arg3 == "" {
-			exitGracefully(errors.New("you must give the migraion a name"))
+			exitGracefully(errors.New("you must give the migration a name"))
 		}
 
 		fileName := fmt.Sprintf("%d_%s", time.Now().UnixMicro(), arg3)
