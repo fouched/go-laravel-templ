@@ -3,6 +3,7 @@ package rapidus
 import (
 	"github.com/golang-migrate/migrate/v4"
 	"log"
+	"path/filepath"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql"
@@ -11,7 +12,8 @@ import (
 )
 
 func (r *Rapidus) MigrateUp(dsn string) error {
-	m, err := migrate.New("file://"+r.RootPath+"/migrations", dsn)
+	rootPath := filepath.ToSlash(r.RootPath)
+	m, err := migrate.New("file://"+rootPath+"/migrations", dsn)
 	if err != nil {
 		return err
 	}
@@ -26,7 +28,8 @@ func (r *Rapidus) MigrateUp(dsn string) error {
 }
 
 func (r *Rapidus) MigrateDownAll(dsn string) error {
-	m, err := migrate.New("file://"+r.RootPath+"/migrations", dsn)
+	rootPath := filepath.ToSlash(r.RootPath)
+	m, err := migrate.New("file://"+rootPath+"/migrations", dsn)
 	if err != nil {
 		return err
 	}
@@ -40,7 +43,8 @@ func (r *Rapidus) MigrateDownAll(dsn string) error {
 }
 
 func (r *Rapidus) Steps(n int, dsn string) error {
-	m, err := migrate.New("file://"+r.RootPath+"/migrations", dsn)
+	rootPath := filepath.ToSlash(r.RootPath)
+	m, err := migrate.New("file://"+rootPath+"/migrations", dsn)
 	if err != nil {
 		return err
 	}
@@ -54,7 +58,8 @@ func (r *Rapidus) Steps(n int, dsn string) error {
 }
 
 func (r *Rapidus) MigrateForce(dsn string) error {
-	m, err := migrate.New("file://"+r.RootPath+"/migrations", dsn)
+	rootPath := filepath.ToSlash(r.RootPath)
+	m, err := migrate.New("file://"+rootPath+"/migrations", dsn)
 	if err != nil {
 		return err
 	}
