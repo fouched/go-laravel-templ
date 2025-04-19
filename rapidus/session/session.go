@@ -1,6 +1,9 @@
 package session
 
 import (
+	"database/sql"
+	"github.com/alexedwards/scs/mysqlstore"
+	"github.com/alexedwards/scs/postgresstore"
 	"github.com/alexedwards/scs/v2"
 	"net/http"
 	"strconv"
@@ -15,6 +18,7 @@ type Session struct {
 	CookieName     string
 	CookieDomain   string
 	SessionType    string
+	DBPool         *sql.DB
 }
 
 func (s *Session) InitSession() *scs.SessionManager {
@@ -45,7 +49,10 @@ func (s *Session) InitSession() *scs.SessionManager {
 	switch strings.ToLower(s.SessionType) {
 	case "redis":
 	case "mysql", "mariadb":
+		session.Store = mysqlstore.New(s.DBPool)
 	case "postgres", "postgresql":
+		// we are using postgresstore, but c.DBPool contains the optimized pqx driver connection
+		session.Store = postgresstore.New(s.DBPool)
 	default:
 		// cookie
 	}

@@ -15,6 +15,8 @@ require (
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
+	github.com/alexedwards/scs/mysqlstore v0.0.0-20250417082927-ab20b3feb5e9 // indirect
+	github.com/alexedwards/scs/postgresstore v0.0.0-20250417082927-ab20b3feb5e9 // indirect
 	github.com/fouched/toolkit/v2 v2.0.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect

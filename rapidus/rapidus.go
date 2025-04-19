@@ -107,6 +107,7 @@ func (r *Rapidus) New(rootPath string) error {
 		CookieName:     r.config.cookie.name,
 		CookieDomain:   r.config.cookie.domain,
 		SessionType:    r.config.sessionType,
+		DBPool:         r.DB.Pool,
 	}
 	r.Session = s.InitSession()
 
