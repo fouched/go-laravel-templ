@@ -1,17 +1,12 @@
 package handlers
 
 import (
-	"github.com/fouched/rapidus/render"
 	"myapp/views"
 	"net/http"
 )
 
 func (h *Handlers) UserLoginGet(w http.ResponseWriter, r *http.Request) {
-	t := views.Login()
-	err := render.Template(w, r, t)
-	if err != nil {
-		h.App.ErrorLog.Println("error rendering:", err)
-	}
+	h.render(w, r, views.Login())
 }
 
 func (h *Handlers) UserLoginPost(w http.ResponseWriter, r *http.Request) {
@@ -40,14 +35,14 @@ func (h *Handlers) UserLoginPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	h.App.Session.Put(r.Context(), "userID", user.ID)
+	h.sessionPut(r.Context(), "userID", user.ID)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
 func (h *Handlers) LogOut(w http.ResponseWriter, r *http.Request) {
-	h.App.Session.RenewToken(r.Context())
-	h.App.Session.Remove(r.Context(), "userID")
+	_ = h.sessionRenew(r.Context())
+	h.sessionRemove(r.Context(), "userID")
 
 	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }

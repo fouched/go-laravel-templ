@@ -3,18 +3,13 @@ package handlers
 import (
 	"fmt"
 	"github.com/fouched/rapidus"
-	"github.com/fouched/rapidus/render"
 	"myapp/data"
 	"myapp/views"
 	"net/http"
 )
 
 func (h *Handlers) Form(w http.ResponseWriter, r *http.Request) {
-	t := views.Form(data.User{}, h.App.Validator(nil))
-	err := render.Template(w, r, t)
-	if err != nil {
-		h.App.ErrorLog.Println("error rendering:", err)
-	}
+	h.render(w, r, views.Form(data.User{}, h.App.Validator(nil)))
 }
 
 func (h *Handlers) PostForm(w http.ResponseWriter, r *http.Request) {
@@ -62,10 +57,6 @@ func (h *Handlers) PostForm(w http.ResponseWriter, r *http.Request) {
 		user.LastName = r.Form.Get("last_name")
 		user.Email = r.Form.Get("email")
 
-		t := views.Form(user, validator)
-		err := render.Template(w, r, t)
-		if err != nil {
-			h.App.ErrorLog.Println("error rendering:", err)
-		}
+		h.render(w, r, views.Form(user, validator))
 	}
 }

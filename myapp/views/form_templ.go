@@ -191,7 +191,7 @@ func Form(user data.User, validator *rapidus.Validation) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</div></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Submit form\"></form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back...</a></div><p>&nbsp;</p><script>\r\n        // note did not enable bootstrap validation\r\n        </script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</div></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\"></form><br><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back</a></div><p>&nbsp;</p><script>\r\n        // note did not enable bootstrap validation\r\n        </script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
