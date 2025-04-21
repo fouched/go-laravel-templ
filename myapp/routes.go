@@ -12,17 +12,19 @@ func (a *application) routes() *chi.Mux {
 	// middleware comes before routes
 
 	// routes
-	a.App.Routes.Get("/", a.Handlers.Home)
-	a.App.Routes.Get("/sessions", a.Handlers.SessionTest)
+	//a.App.Routes.Get("/", a.Handlers.Home)
+	//using the convenience wrapper below
+	a.get("/", a.Handlers.Home)
+	a.get("/sessions", a.Handlers.SessionTest)
 
-	a.App.Routes.Get("/users/login", a.Handlers.UserLoginGet)
-	a.App.Routes.Post("/users/login", a.Handlers.UserLoginPost)
-	a.App.Routes.Get("/users/logout", a.Handlers.LogOut)
+	a.get("/users/login", a.Handlers.UserLoginGet)
+	a.post("/users/login", a.Handlers.UserLoginPost)
+	a.get("/users/logout", a.Handlers.LogOut)
 
-	a.App.Routes.Get("/form", a.Handlers.Form)
-	a.App.Routes.Post("/form", a.Handlers.PostForm)
+	a.get("/form", a.Handlers.Form)
+	a.post("/form", a.Handlers.PostForm)
 
-	a.App.Routes.Get("/create-user", func(w http.ResponseWriter, r *http.Request) {
+	a.get("/create-user", func(w http.ResponseWriter, r *http.Request) {
 		u := data.User{
 			FirstName: "Fouche",
 			LastName:  "du Preez",
@@ -40,7 +42,7 @@ func (a *application) routes() *chi.Mux {
 		fmt.Fprintf(w, "%d: %s", id, u.FirstName)
 	})
 
-	a.App.Routes.Get("/get-all-users", func(w http.ResponseWriter, r *http.Request) {
+	a.get("/get-all-users", func(w http.ResponseWriter, r *http.Request) {
 		users, err := a.Models.Users.GetAll()
 		if err != nil {
 			a.App.ErrorLog.Println(err)
@@ -52,7 +54,7 @@ func (a *application) routes() *chi.Mux {
 		}
 	})
 
-	a.App.Routes.Get("/get-user/{id}", func(w http.ResponseWriter, r *http.Request) {
+	a.get("/get-user/{id}", func(w http.ResponseWriter, r *http.Request) {
 		id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 
 		u, err := a.Models.Users.Get(id)
@@ -63,7 +65,7 @@ func (a *application) routes() *chi.Mux {
 		fmt.Fprintf(w, "%s %s %s", u.FirstName, u.LastName, u.Email)
 	})
 
-	a.App.Routes.Get("/update-user/{id}", func(w http.ResponseWriter, r *http.Request) {
+	a.get("/update-user/{id}", func(w http.ResponseWriter, r *http.Request) {
 		id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 
 		u, err := a.Models.Users.Get(id)
