@@ -53,7 +53,7 @@ func Home(isAuthenticated bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a> <a href=\"/users/login\" class=\"list-group-item list-group-item-action\">Login a user</a> <a href=\"/form\" class=\"list-group-item list-group-item-action\">Form Validation</a></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a> <a href=\"/users/login\" class=\"list-group-item list-group-item-action\">Login a user</a> <a href=\"/form\" class=\"list-group-item list-group-item-action\">Form Validation</a> <a href=\"/json\" class=\"list-group-item list-group-item-action\">JSON Response</a> <a href=\"/xml\" class=\"list-group-item list-group-item-action\">XML Response</a> <a href=\"/download-file\" class=\"list-group-item list-group-item-action\">Download File</a></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
