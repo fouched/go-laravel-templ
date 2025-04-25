@@ -64,3 +64,21 @@ func (h *Handlers) XML(w http.ResponseWriter, r *http.Request) {
 func (h *Handlers) DownloadFile(w http.ResponseWriter, r *http.Request) {
 	h.App.DownloadStaticFile(w, r, "./public/images/rapidus.jpg", "rapidus.jpg")
 }
+
+func (h *Handlers) TestCrypto(w http.ResponseWriter, r *http.Request) {
+	plainText := "Hello, world"
+
+	encrypted, err := h.encrypt(plainText)
+	if err != nil {
+		h.App.ErrorLog.Println(err)
+		h.App.Error500(w)
+	}
+
+	decrypted, err := h.decrypt(encrypted)
+	if err != nil {
+		h.App.ErrorLog.Println(err)
+		h.App.Error500(w)
+	}
+
+	h.render(w, r, views.Crypto(plainText, encrypted, decrypted))
+}

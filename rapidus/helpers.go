@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	randomString = "abcdefghijklmnopqrstuvwzyzABCDEFGHIKLMNOPQRSTUVWXYZ_+"
+	randomString = "abcdefghijklmnopqrstuvwzyzABCDEFGHIKLMNOPQRSTUVWXYZ_+1234567890"
 )
 
 // RandomString generates a random string of length n

@@ -1,0 +1,27 @@
+package views
+
+import "myapp/views/layouts"
+
+templ Crypto(p, e, d string) {
+    @layouts.Base("Crypto") {
+        <div class="col text-center">
+            <div class="d-flex align-items-center justify-content-center mt-5">
+                <div>
+                    <img src="/public/images/rapidus.jpg" class="mb-5" style="width: 100px;height:auto;" alt="Rapidus Logo">
+                        <h1>Rapidus</h1>
+                    <hr>
+                        <h5>Crypto Sample</h5>
+                    <hr>
+                    <br>
+                    <p>Plain text: <b>{p}</b></p>
+                    <p>Encrypted: <b>{e}</b></p>
+                    <p>Decrypted: <b>{d}</b></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <a class="btn btn-outline-secondary" href="/">Back</a>
+        </div>
+    }
+}

@@ -16,16 +16,17 @@ import (
 const version = "1.0.0"
 
 type Rapidus struct {
-	AppName  string
-	Debug    bool
-	Version  string
-	ErrorLog *log.Logger
-	InfoLog  *log.Logger
-	RootPath string
-	Routes   *chi.Mux
-	Session  *scs.SessionManager
-	DB       Database
-	config   config // no reason to export this
+	AppName       string
+	Debug         bool
+	Version       string
+	ErrorLog      *log.Logger
+	InfoLog       *log.Logger
+	RootPath      string
+	Routes        *chi.Mux
+	Session       *scs.SessionManager
+	DB            Database
+	config        config // no reason to export this
+	EncryptionKey string
 }
 
 type config struct {
@@ -110,6 +111,9 @@ func (r *Rapidus) New(rootPath string) error {
 		DBPool:         r.DB.Pool,
 	}
 	r.Session = s.InitSession()
+
+	// encryption key
+	r.EncryptionKey = os.Getenv("KEY")
 
 	return nil
 }

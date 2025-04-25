@@ -24,6 +24,8 @@ github.com/fouched/toolkit/v2 v2.2.2 h1:T2q1uHXVKNrFZqbfZI5enspgeDnjpgXlD6O5hdrc
 github.com/fouched/toolkit/v2 v2.2.2/go.mod h1:YFTIR+lQEYrz4G5BdhbSplRGfCmeh1bglYhkXGaqSYk=
 github.com/fouched/toolkit/v2 v2.3.2 h1:CIAxJA61rEfB/xlR+3ZIV9cMwvLbgjYLGfB5qlVBBCI=
 github.com/fouched/toolkit/v2 v2.3.2/go.mod h1:YFTIR+lQEYrz4G5BdhbSplRGfCmeh1bglYhkXGaqSYk=
+github.com/fouched/toolkit/v2 v2.4.0 h1:hDmzrcX2XlO1RtWZjx0KE1yiv9sIdHWaizOS17IyoF4=
+github.com/fouched/toolkit/v2 v2.4.0/go.mod h1:YFTIR+lQEYrz4G5BdhbSplRGfCmeh1bglYhkXGaqSYk=
 github.com/go-chi/chi/v5 v5.2.1 h1:KOIHODQj58PmL80G2Eak4WdvUzjSJSm0vG72crDCqb8=
 github.com/go-chi/chi/v5 v5.2.1/go.mod h1:L2yAIGWB3H+phAw1NxKwWM+7eUH/lU8pOMm5hHcoops=
 github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
