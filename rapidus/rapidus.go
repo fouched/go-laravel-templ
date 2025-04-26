@@ -3,9 +3,11 @@ package rapidus
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
+	"github.com/fouched/rapidus/cache"
 	"github.com/fouched/rapidus/session"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
+	"github.com/redis/go-redis/v9"
 	"log"
 	"net/http"
 	"os"
@@ -27,6 +29,7 @@ type Rapidus struct {
 	DB            Database
 	config        config // no reason to export this
 	EncryptionKey string
+	Cache         cache.Cache
 }
 
 type config struct {
@@ -35,6 +38,7 @@ type config struct {
 	cookie      cookieConfig
 	sessionType string
 	database    databaseConfig
+	redis       redisConfig
 }
 
 func (r *Rapidus) New(rootPath string) error {
@@ -82,6 +86,10 @@ func (r *Rapidus) New(rootPath string) error {
 		}
 	}
 
+	if os.Getenv("CACHE") == "redis" {
+		r.Cache = r.createRedisClient()
+	}
+
 	// setup config
 	r.config = config{
 		port:     os.Getenv("PORT"),
@@ -97,6 +105,11 @@ func (r *Rapidus) New(rootPath string) error {
 		database: databaseConfig{
 			dsn:      r.BuildDSN(),
 			database: os.Getenv("DATABASE_TYPE"),
+		},
+		redis: redisConfig{
+			host:     os.Getenv("REDIS_HOST"),
+			password: os.Getenv("REDIS_PASSWORD"),
+			prefix:   os.Getenv("REDIS_PREFIX"),
 		},
 	}
 
@@ -184,4 +197,16 @@ func (r *Rapidus) BuildDSN() string {
 	}
 
 	return dsn
+}
+
+func (r *Rapidus) createRedisClient() *cache.RedisCache {
+	cacheClient := cache.RedisCache{
+		Conn: redis.NewClient(&redis.Options{
+			Addr:     r.config.redis.host,
+			Password: r.config.redis.password,
+			DB:       0, // use default DB
+		}),
+		Prefix: r.config.redis.prefix,
+	}
+	return &cacheClient
 }
