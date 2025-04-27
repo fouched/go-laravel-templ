@@ -2,9 +2,11 @@ package session
 
 import (
 	"database/sql"
+	"github.com/alexedwards/scs/goredisstore"
 	"github.com/alexedwards/scs/mysqlstore"
 	"github.com/alexedwards/scs/postgresstore"
 	"github.com/alexedwards/scs/v2"
+	"github.com/redis/go-redis/v9"
 	"net/http"
 	"strconv"
 	"strings"
@@ -19,6 +21,7 @@ type Session struct {
 	CookieDomain   string
 	SessionType    string
 	DBPool         *sql.DB
+	RedisPool      *redis.Client
 }
 
 func (s *Session) InitSession() *scs.SessionManager {
@@ -48,6 +51,7 @@ func (s *Session) InitSession() *scs.SessionManager {
 	// which session store
 	switch strings.ToLower(s.SessionType) {
 	case "redis":
+		session.Store = goredisstore.New(s.RedisPool)
 	case "mysql", "mariadb":
 		session.Store = mysqlstore.New(s.DBPool)
 	case "postgres", "postgresql":

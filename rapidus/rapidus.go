@@ -85,7 +85,7 @@ func (r *Rapidus) New(rootPath string) error {
 		}
 	}
 
-	if os.Getenv("CACHE") == "redis" {
+	if os.Getenv("CACHE") == "redis" || os.Getenv("SESSION_TYPE") == "redis" {
 		r.RedisClient = r.createRedisClient()
 	}
 
@@ -122,6 +122,14 @@ func (r *Rapidus) New(rootPath string) error {
 		SessionType:    r.config.sessionType,
 		DBPool:         r.DB.Pool,
 	}
+
+	switch r.config.sessionType {
+	case "redis":
+		s.RedisPool = r.RedisClient
+	case "mysql", "mariadb", "postgres", "postgresql":
+		s.DBPool = r.DB.Pool
+	}
+
 	r.Session = s.InitSession()
 
 	// encryption key
