@@ -30,12 +30,13 @@ func (c *RedisCache) Has(str string) (bool, error) {
 	conn := c.Conn
 
 	val, err := conn.Get(ctx, key).Result()
+
 	switch {
 	case errors.Is(err, redis.Nil):
 		fmt.Println("key does not exist")
 		return false, err
 	case err != nil:
-		fmt.Println("Get failed", err)
+		fmt.Println("get failed", err)
 		return false, err
 	case val == "":
 		fmt.Println("value is empty")
@@ -46,11 +47,10 @@ func (c *RedisCache) Has(str string) (bool, error) {
 }
 
 func (c *RedisCache) Get(str string) (interface{}, error) {
-
 	return "", nil
 }
 
-func (c *RedisCache) Set(str string, data interface{}, ttl ...int) error {
+func (c *RedisCache) Set(str string, value interface{}, ttl ...int) error {
 
 	return nil
 }

@@ -3,7 +3,6 @@ package rapidus
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/fouched/rapidus/cache"
 	"github.com/fouched/rapidus/session"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
@@ -29,7 +28,7 @@ type Rapidus struct {
 	DB            Database
 	config        config // no reason to export this
 	EncryptionKey string
-	Cache         cache.Cache
+	RedisClient   *redis.Client
 }
 
 type config struct {
@@ -87,7 +86,7 @@ func (r *Rapidus) New(rootPath string) error {
 	}
 
 	if os.Getenv("CACHE") == "redis" {
-		r.Cache = r.createRedisClient()
+		r.RedisClient = r.createRedisClient()
 	}
 
 	// setup config
@@ -199,14 +198,18 @@ func (r *Rapidus) BuildDSN() string {
 	return dsn
 }
 
-func (r *Rapidus) createRedisClient() *cache.RedisCache {
-	cacheClient := cache.RedisCache{
-		Conn: redis.NewClient(&redis.Options{
-			Addr:     r.config.redis.host,
-			Password: r.config.redis.password,
-			DB:       0, // use default DB
-		}),
-		Prefix: r.config.redis.prefix,
-	}
-	return &cacheClient
+func (r *Rapidus) createRedisClient() *redis.Client {
+
+	// PoolSize int
+	// Base number of socket connections.
+	// Default is 10 connections per every available CPU as reported by runtime.GOMAXPROCS.
+	// If there is not enough connections in the pool, new connections will be allocated in excess of PoolSize,
+	// you can limit it through MaxActiveConns
+
+	return redis.NewClient(&redis.Options{
+		Addr:     r.config.redis.host,
+		Password: r.config.redis.password,
+		DB:       0, // use default DB
+	})
+
 }

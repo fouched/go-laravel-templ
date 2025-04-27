@@ -7,6 +7,10 @@ import (
 
 var t toolkit.Tools
 
+func (r *Rapidus) ReadJSON(w http.ResponseWriter, req *http.Request, data interface{}) error {
+	return t.ReadJSON(w, req, data)
+}
+
 func (r *Rapidus) WriteJSON(w http.ResponseWriter, status int, data interface{}, headers ...http.Header) error {
 	return t.WriteJSON(w, status, data, headers...)
 }

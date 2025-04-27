@@ -1,0 +1,111 @@
+package views
+
+import "myapp/views/layouts"
+
+templ CachePage() {
+    @layouts.Base("Cache Demo") {
+        <h2 class="mt-5">Cache Content</h2>
+
+        <hr>
+
+        <form>
+            <div class="mb-3">
+                <label for="cache_name" class="form-label">Cache Keys</label>
+                <input type="text" class="form-control" id="cache_name" name="cache_name">
+            </div>
+            <div class="mb-3">
+                <label for="cache_value" class="form-label">Cache Value</label>
+                <input type="text" class="form-control" id="cache_value" name="cache_value">
+            </div>
+            <div id="saveOutput" class="alert alert-secondary">Nothing saved yet...</div>
+            <button class="btn btn-sm btn-success"
+                hx-post="/cache/save"
+                hx-target="#saveOutput"
+                hx-swap="outerHTML"
+            >Save in cache</button>
+        </form>
+
+        <hr>
+
+        <form>
+            <div class="mb-3">
+                <label for="cache_get" class="form-label">Get Item From Cache</label>
+                <input type="text" class="form-control" id="cache_get" name="cache_get">
+            </div>
+            <div id="getOutput" class="alert alert-secondary">Nothing retrieved yet...</div>
+            <button class="btn btn-sm btn-primary"
+                hx-post="/cache/get"
+                hx-target="#getOutput"
+                hx-swap="outerHTML"
+            >Get from cache</button>
+        </form>
+
+        <hr>
+
+        <form>
+            <div class="mb-3">
+                <label for="delete" class="form-label">Delete Item From Cache</label>
+                <input type="text" class="form-control" id="cache_delete" name="cache_delete">
+            </div>
+            <div id="deleteOutput" class="alert alert-secondary">Nothing deleted yet...</div>
+            <button class="btn btn-sm btn-primary"
+                hx-post="/cache/delete"
+                hx-target="#deleteOutput"
+                hx-swap="outerHTML"
+            >Delete from cache</button>
+        </form>
+
+        <hr>
+
+        <form>
+            <div id="emptyOutput" class="alert alert-secondary">Cache not emptied yet...</div>
+            <button class="btn btn-sm btn-primary"
+                hx-post="/cache/empty"
+                hx-target="#emptyOutput"
+                hx-swap="outerHTML"
+            >Empty cache</button>
+        </form>
+
+        <hr>
+
+        <form>
+            <div class="text-center">
+                <a class="btn btn-outline-secondary" href="/">Back</a>
+            </div>
+        </form>
+
+        <p>&nbsp;</p>
+    }
+}
+
+templ CacheSave(msg string, err error) {
+    if err != nil {
+        <div id="saveOutput" class="alert alert-danger">{msg}</div>
+    } else {
+        <div id="saveOutput" class="alert alert-success">{msg}</div>
+    }
+}
+
+templ CacheGet(msg string, err error) {
+    if err != nil {
+        <div id="getOutput" class="alert alert-danger">{msg}</div>
+    } else {
+        <div id="getOutput" class="alert alert-success">{msg}</div>
+    }
+}
+
+templ CacheDelete(msg string, err error) {
+    if err != nil {
+        <div id="deleteOutput" class="alert alert-danger">{msg}</div>
+    } else {
+        <div id="deleteOutput" class="alert alert-success">{msg}</div>
+    }
+}
+
+templ CacheEmpty(msg string, err error) {
+    if err != nil {
+        <div id="deleteOutput" class="alert alert-danger">{msg}</div>
+    } else {
+        <div id="deleteOutput" class="alert alert-success">{msg}</div>
+    }
+}
