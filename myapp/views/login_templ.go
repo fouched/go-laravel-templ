@@ -43,7 +43,20 @@ func Login() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Login</h2><hr><form method=\"post\" action=\"/users/login\" name=\"login-form\" id=\"login-form\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate=\"\"><input type=\"hidden\" name=\"csrf_token\" value=\"{{.CSRFToken}}\"><div class=\"mb-3\"><label for=\"email\" class=\"form-lable\">Email</label> <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" required autocomplete=\"email-new\"></div><div class=\"mb-3\"><label for=\"password\" class=\"form-lable\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required autocomplete=\"password-new\"></div><hr><button type=\"submit\" class=\"btn btn-primary\" onclick=\"validate()\">Login</button><p class=\"mt-2\"><small><a href=\"/user/forgot-password\">Forgot password?</a></small></p></form><div class=\"text-center\"><a href=\"/\" class=\"btn btn-outline-secondary\">Back</a></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Login</h2><hr><form method=\"post\" action=\"/users/login\" name=\"login-form\" id=\"login-form\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate=\"\"><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 string
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/login.templ`, Line: 12, Col: 81}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"mb-3\"><label for=\"email\" class=\"form-lable\">Email</label> <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" required autocomplete=\"email-new\"></div><div class=\"mb-3\"><label for=\"password\" class=\"form-lable\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required autocomplete=\"password-new\"></div><hr><button type=\"submit\" class=\"btn btn-primary\" onclick=\"validate()\">Login</button><p class=\"mt-2\"><small><a href=\"/user/forgot-password\">Forgot password?</a></small></p></form><div class=\"text-center\"><a href=\"/\" class=\"btn btn-outline-secondary\">Back</a></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -9,6 +9,7 @@ templ CachePage() {
         <hr>
 
         <form>
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
             <div class="mb-3">
                 <label for="cache_name" class="form-label">Cache Keys</label>
                 <input type="text" class="form-control" id="cache_name" name="cache_name">
@@ -28,6 +29,7 @@ templ CachePage() {
         <hr>
 
         <form>
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
             <div class="mb-3">
                 <label for="cache_get" class="form-label">Get Item From Cache</label>
                 <input type="text" class="form-control" id="cache_get" name="cache_get">
@@ -43,6 +45,7 @@ templ CachePage() {
         <hr>
 
         <form>
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
             <div class="mb-3">
                 <label for="delete" class="form-label">Delete Item From Cache</label>
                 <input type="text" class="form-control" id="cache_delete" name="cache_delete">
@@ -58,6 +61,7 @@ templ CachePage() {
         <hr>
 
         <form>
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
             <div id="emptyOutput" class="alert alert-secondary">Cache not emptied yet...</div>
             <button class="btn btn-sm btn-primary"
                 hx-post="/cache/empty"

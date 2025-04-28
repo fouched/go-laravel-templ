@@ -22,4 +22,5 @@ func addMiddleware(mux *chi.Mux, r *Rapidus) {
 	//}
 
 	mux.Use(r.SessionLoad)
+	mux.Use(r.NoSurf)
 }

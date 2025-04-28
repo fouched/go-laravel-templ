@@ -9,7 +9,7 @@ templ Login() {
         <form method="post" action="/users/login" name="login-form" id="login-form"
                 class="d-block needs-validation" autocomplete="off" novalidate="">
 
-            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
 
             <div class="mb-3">
                 <label for="email" class="form-lable">Email</label>
