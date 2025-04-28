@@ -5,6 +5,7 @@ import (
 	"myapp/data"
 	"myapp/views"
 	"net/http"
+	"time"
 )
 
 type Handlers struct {
@@ -13,6 +14,8 @@ type Handlers struct {
 }
 
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
+	defer h.App.LoadTime(time.Now())
+
 	userID := h.sessionGetInt(r.Context(), "userID")
 	isAuthenticated := userID != 0
 
