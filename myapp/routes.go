@@ -36,6 +36,12 @@ func (a *application) routes() *chi.Mux {
 	a.post("/cache/delete", a.Handlers.CacheDelete)
 	a.post("/cache/empty", a.Handlers.CacheEmpty)
 
+	a.get("/cache/redis/demo", a.Handlers.CacheDemoRedis)
+	a.post("/cache/redis/save", a.Handlers.CacheSaveRedis)
+	a.post("/cache/redis/get", a.Handlers.CacheGetRedis)
+	a.post("/cache/redis/delete", a.Handlers.CacheDeleteRedis)
+	a.post("/cache/redis/empty", a.Handlers.CacheEmptyRedis)
+
 	a.get("/create-user", func(w http.ResponseWriter, r *http.Request) {
 		u := data.User{
 			FirstName: "Fouche",

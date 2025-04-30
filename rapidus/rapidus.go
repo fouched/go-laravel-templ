@@ -3,6 +3,8 @@ package rapidus
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
+	"github.com/dgraph-io/badger/v4"
+	"github.com/fouched/rapidus/cache"
 	"github.com/fouched/rapidus/session"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
@@ -15,6 +17,9 @@ import (
 )
 
 const version = "1.0.0"
+
+var badgerCache *cache.BadgerCache
+var badgerConn *badger.DB
 
 type Rapidus struct {
 	AppName       string
@@ -29,6 +34,7 @@ type Rapidus struct {
 	config        config // no reason to export this
 	EncryptionKey string
 	RedisClient   *redis.Client
+	Cache         cache.Cache
 }
 
 type config struct {
@@ -87,6 +93,18 @@ func (r *Rapidus) New(rootPath string) error {
 
 	if os.Getenv("CACHE") == "redis" || os.Getenv("SESSION_TYPE") == "redis" {
 		r.RedisClient = r.createRedisClient()
+	}
+
+	if os.Getenv("CACHE") == "badger" {
+		badgerCache = r.createClientBadgerCache()
+		r.Cache = badgerCache
+		badgerConn = badgerCache.Conn
+
+		go func() {
+			for range time.Tick(12 * time.Hour) {
+				_ = badgerCache.Conn.RunValueLogGC(0.7)
+			}
+		}()
 	}
 
 	// setup config
@@ -161,7 +179,13 @@ func (r *Rapidus) ListenAndServe() {
 		WriteTimeout: 600 * time.Second,
 	}
 
-	defer r.DB.Pool.Close()
+	if r.DB.Pool != nil {
+		defer r.DB.Pool.Close()
+	}
+
+	if badgerConn != nil {
+		defer badgerConn.Close()
+	}
 
 	r.InfoLog.Printf("Listening on port %s", os.Getenv("PORT"))
 	err := srv.ListenAndServe()
@@ -219,5 +243,21 @@ func (r *Rapidus) createRedisClient() *redis.Client {
 		Password: r.config.redis.password,
 		DB:       0, // use default DB
 	})
+}
 
+func (r *Rapidus) createClientBadgerCache() *cache.BadgerCache {
+	cacheClient := cache.BadgerCache{
+		Conn: r.createBadgerConn(),
+	}
+
+	return &cacheClient
+}
+
+func (r *Rapidus) createBadgerConn() *badger.DB {
+	db, err := badger.Open(badger.DefaultOptions(r.RootPath + "/tmp/badger"))
+
+	if err != nil {
+		return nil
+	}
+	return db
 }
