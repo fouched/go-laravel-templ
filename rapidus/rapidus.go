@@ -5,6 +5,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/dgraph-io/badger/v4"
 	"github.com/fouched/rapidus/cache"
+	"github.com/fouched/rapidus/mailer"
 	"github.com/fouched/rapidus/session"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
@@ -35,6 +36,7 @@ type Rapidus struct {
 	EncryptionKey string
 	RedisClient   *redis.Client
 	Cache         cache.Cache
+	Mail          mailer.Mail
 }
 
 type config struct {
@@ -49,7 +51,7 @@ type config struct {
 func (r *Rapidus) New(rootPath string) error {
 	pathConfig := initPaths{
 		rootPath:    rootPath,
-		folderNames: []string{"handlers", "migrations", "views", "data", "public", "tmp", "logs", "middleware"},
+		folderNames: []string{"handlers", "migrations", "views", "mail", "data", "public", "tmp", "logs", "middleware"},
 	}
 
 	err := r.Init(pathConfig)
@@ -70,11 +72,14 @@ func (r *Rapidus) New(rootPath string) error {
 
 	// create loggers
 	infoLog, errorLog := r.startLoggers()
+
+	// create Rapidus configuration
 	r.InfoLog = infoLog
 	r.ErrorLog = errorLog
 	r.Debug, _ = strconv.ParseBool(os.Getenv("DEBUG"))
 	r.Version = version
 	r.RootPath = rootPath
+	r.Mail = r.createMailer()
 	r.Routes = r.routes().(*chi.Mux)
 
 	// connect to database if specified
@@ -96,7 +101,7 @@ func (r *Rapidus) New(rootPath string) error {
 	}
 
 	if os.Getenv("CACHE") == "badger" {
-		badgerCache = r.createClientBadgerCache()
+		badgerCache = r.createBadgerCache()
 		r.Cache = badgerCache
 		badgerConn = badgerCache.Conn
 
@@ -152,6 +157,9 @@ func (r *Rapidus) New(rootPath string) error {
 
 	// encryption key
 	r.EncryptionKey = os.Getenv("KEY")
+
+	// listen for mail requests
+	go r.Mail.ListenForMail()
 
 	return nil
 }
@@ -210,6 +218,28 @@ func (r *Rapidus) startLoggers() (*log.Logger, *log.Logger) {
 	return infoLog, errorLog
 }
 
+func (r *Rapidus) createMailer() mailer.Mail {
+	port, _ := strconv.Atoi(os.Getenv("SMTP_PORT"))
+	m := mailer.Mail{
+		Domain:      os.Getenv("MAIL_DOMAIN"),
+		Templates:   r.RootPath + "/mail",
+		Host:        os.Getenv("SMTP_HOST"),
+		Port:        port,
+		Username:    os.Getenv("SMTP_USERNAME"),
+		Password:    os.Getenv("SMTP_PASSWORD"),
+		Encryption:  os.Getenv("SMTP_ENCRYPTION"),
+		FromAddress: os.Getenv("MAIL_FROM_NAME"),
+		FromName:    os.Getenv("MAIL_FROM_ADDRESS"),
+		Jobs:        make(chan mailer.Message, 20),
+		Results:     make(chan mailer.Result, 20),
+		API:         os.Getenv("MAILER_API"),
+		APIKey:      os.Getenv("MAILER_KEY"),
+		APIUrl:      os.Getenv("MAILER_URL"),
+	}
+
+	return m
+}
+
 func (r *Rapidus) BuildDSN() string {
 	var dsn string
 
@@ -245,7 +275,7 @@ func (r *Rapidus) createRedisClient() *redis.Client {
 	})
 }
 
-func (r *Rapidus) createClientBadgerCache() *cache.BadgerCache {
+func (r *Rapidus) createBadgerCache() *cache.BadgerCache {
 	cacheClient := cache.BadgerCache{
 		Conn: r.createBadgerConn(),
 	}
