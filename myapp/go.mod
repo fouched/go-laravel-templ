@@ -6,8 +6,9 @@ replace github.com/fouched/rapidus => ../rapidus
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2
-	github.com/a-h/templ v0.3.857
+	github.com/a-h/templ v0.3.865
 	github.com/fouched/rapidus v0.0.0-00010101000000-000000000000
+	github.com/fouched/toolkit/v2 v2.4.0
 	github.com/go-chi/chi/v5 v5.2.1
 	github.com/ory/dockertest/v3 v3.12.0
 	github.com/upper/db/v4 v4.10.0
@@ -38,7 +39,6 @@ require (
 	github.com/docker/go-connections v0.5.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
-	github.com/fouched/toolkit/v2 v2.4.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-sql-driver/mysql v1.9.2 // indirect
@@ -65,7 +65,7 @@ require (
 	github.com/moby/term v0.5.2 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.1 // indirect
-	github.com/opencontainers/runc v1.2.6 // indirect
+	github.com/opencontainers/runc v1.3.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/redis/go-redis/v9 v9.8.0 // indirect
 	github.com/segmentio/fasthash v1.0.3 // indirect
