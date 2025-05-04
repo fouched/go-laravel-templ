@@ -21,6 +21,11 @@ templ Login() {
                 <input type="password" class="form-control" id="password" name="password" required autocomplete="password-new">
             </div>
 
+            <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" id="remember" name="remember" value="remember">
+                <label for="remember" class="form-check-label">Remember me</label>
+            </div>
+
             <hr>
 
             <button type="submit" class="btn btn-primary" onclick="validate()">Login</button>

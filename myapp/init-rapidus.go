@@ -5,6 +5,7 @@ import (
 	"log"
 	"myapp/data"
 	"myapp/handlers"
+	"myapp/middleware"
 	"os"
 )
 
@@ -23,11 +24,16 @@ func initApplication() *application {
 
 	rap.AppName = "myapp"
 
+	myMiddleware := &middleware.Middleware{
+		App: rap,
+	}
+
 	myHandlers := &handlers.Handlers{App: rap}
 
 	app := &application{
-		App:      rap,
-		Handlers: myHandlers,
+		App:        rap,
+		Handlers:   myHandlers,
+		Middleware: myMiddleware,
 	}
 
 	// set application routes to rapidus routes

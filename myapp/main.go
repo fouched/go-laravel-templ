@@ -6,15 +6,17 @@ import (
 	"github.com/fouched/rapidus"
 	"myapp/data"
 	"myapp/handlers"
+	"myapp/middleware"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
 type application struct {
-	App      *rapidus.Rapidus
-	Handlers *handlers.Handlers
-	Models   data.Models
+	App        *rapidus.Rapidus
+	Handlers   *handlers.Handlers
+	Models     data.Models
+	Middleware *middleware.Middleware
 }
 
 func main() {
