@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "myapp/views/layouts"
 
-func Home(isAuthenticated bool) templ.Component {
+func ResetPassword() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -43,23 +43,13 @@ func Home(isAuthenticated bool) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"col text-center\"><div class=\"d-flex align-items-center justify-content-center mt-5\"><div><img src=\"/public/images/rapidus.jpg\" class=\"mb-5\" alt=\"logo\" style=\"width: 100px;height:auto;\"><h1>Rapidus</h1><hr><small class=\"text-muted\">Go build something awesome</small> ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			if isAuthenticated {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<br><small><a href=\"/users/logout\">Logout</a></small>")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div><p class=\"mt-5\">Things to try:</p><div class=\"list-group\"><a href=\"/sessions\" class=\"list-group-item list-group-item-action\">Try Sessions</a> <a href=\"/users/login\" class=\"list-group-item list-group-item-action\">Login a user</a> <a href=\"/form\" class=\"list-group-item list-group-item-action\">Server Side Form Validation</a> <a href=\"/json\" class=\"list-group-item list-group-item-action\">JSON Response</a> <a href=\"/xml\" class=\"list-group-item list-group-item-action\">XML Response</a> <a href=\"/download-file\" class=\"list-group-item list-group-item-action\">Download File</a> <a href=\"/crypto\" class=\"list-group-item list-group-item-action\">Encrypt / Decrypt</a> <a href=\"/cache/demo\" class=\"list-group-item list-group-item-action\">Cache Demo (HTMX)</a> <a href=\"/cache/redis/demo\" class=\"list-group-item list-group-item-action\">Redis Cache Demo (HTMX)</a></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Forgot Password</h2><hr><!-- todo error --> <!-- todo flash --> <form method=\"post\" name=\"reset_form\" id=\"reset_form\" action=\"/users/reset-password\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate=\"\" onkeydown=\"return event.key != &#39;Enter&#39;;\"><input type=\"hidden\" name=\"csrf_token\" value=\"{{.CSRFToken}}\"> <input type=\"hidden\" name=\"email\" value=\"{{email}}\"><div class=\"mb-3\"><label for=\"password\" class=\"form-label\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required=\"\" autocomplete=\"password-new\"></div><div class=\"mb-3\"><label for=\"verify-password\" class=\"form-label\">Verify Password</label> <input type=\"password\" class=\"form-control\" id=\"verify-password\" name=\"verify-password\" required=\"\" autocomplete=\"verify-password-new\"></div><hr><a href=\"javascript:void(0)\" class=\"btn btn-primary\" onclick=\"val()\">Reset Password</a></form><hr><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back...</a></div><p>&nbsp;</p><!-- todo JS -->")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Home").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Reset Password").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
