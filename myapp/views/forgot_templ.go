@@ -43,13 +43,13 @@ func Forgot() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Forgot Password</h2><hr><!-- todo error --> <!-- todo flash --> <p>Enter your email address in the form below, and we'll email you a link to reset your password.</p><form method=\"post\" name=\"forgot-form\" id=\"forgot-form\" class=\"d-block needs-validation\" action=\"/users/forgot-password\" autocomplete=\"off\" novalidate=\"\" onkeydown=\"return event.key != &#39;Enter&#39;;\"><input type=\"hidden\" name=\"csrf_token\" value=\"{{.CSRFToken}}\"><div class=\"mb-3\"><label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" required=\"\" autocomplete=\"email-new\"></div><hr><a href=\"javascript:void(0)\" class=\"btn btn-primary\" onclick=\"val()\">Send Reset Password Email</a></form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/users/login\">Back</a></div><!-- todo JS -->")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">ForgotGet Password</h2><hr><!-- todo error --> <!-- todo flash --> <p>Enter your email address in the form below, and we'll email you a link to reset your password.</p><form method=\"post\" name=\"forgot-form\" id=\"forgot-form\" class=\"d-block needs-validation\" action=\"/users/forgot-password\" autocomplete=\"off\" novalidate=\"\" onkeydown=\"return event.key != &#39;Enter&#39;;\"><input type=\"hidden\" name=\"csrf_token\" value=\"{{.CSRFToken}}\"><div class=\"mb-3\"><label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" required=\"\" autocomplete=\"email-new\"></div><hr><a href=\"javascript:void(0)\" class=\"btn btn-primary\" onclick=\"val()\">Send Reset Password Email</a></form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/users/login\">Back</a></div><!-- todo JS -->")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Forgot Password").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("ForgotGet Password").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

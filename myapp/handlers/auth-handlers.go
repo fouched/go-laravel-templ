@@ -111,6 +111,10 @@ func (h *Handlers) LogOut(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }
 
-func (h *Handlers) Forgot(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) ForgotGet(w http.ResponseWriter, r *http.Request) {
 	h.render(w, r, views.Forgot())
+}
+
+func (h *Handlers) ForgotPost(w http.ResponseWriter, r *http.Request) {
+
 }
