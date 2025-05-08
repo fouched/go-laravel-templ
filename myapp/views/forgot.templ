@@ -14,14 +14,11 @@ templ Forgot() {
             email you a link to reset your password.
         </p>
 
-        <form method="post"
-              name="forgot-form" id="forgot-form"
+        <form method="post" action="/users/forgot-password"
               class="d-block needs-validation"
-              action="/users/forgot-password"
-              autocomplete="off" novalidate=""
-              onkeydown="return event.key != 'Enter';"
+              autocomplete="off" novalidate
         >
-            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -31,7 +28,7 @@ templ Forgot() {
 
             <hr>
 
-            <a href="javascript:void(0)" class="btn btn-primary" onclick="val()">Send Reset Password Email</a>
+            <input type="submit"  class="btn btn-primary" value="Send Reset Password Email">
 
         </form>
 

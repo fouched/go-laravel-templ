@@ -9,7 +9,7 @@ import (
 templ Form(user data.User, validator *rapidus.Validation) {
     @layouts.Base("Form") {
 
-        <h2 class="mt-5 text-center">Form Validation</h2>
+        <h2 class="mt-5 text-center">Server Side Form Validation</h2>
 
         <hr>
 
@@ -18,7 +18,7 @@ templ Form(user data.User, validator *rapidus.Validation) {
               class="d-block needs-validation"
               autocomplete="off" novalidate>
 
-            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <input type="hidden" name="csrf_token" value={ layouts.CSRFToken(ctx) }>
 
             <div class="mb-3">
                 <label for="first_name" class="form-label">First Name</label>

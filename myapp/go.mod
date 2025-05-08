@@ -28,6 +28,7 @@ require (
 	github.com/alexedwards/scs/postgresstore v0.0.0-20250417082927-ab20b3feb5e9 // indirect
 	github.com/alexedwards/scs/v2 v2.8.0 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
+	github.com/bwmarrin/go-alone v0.0.0-20190806015146-742bb55d1631 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/containerd/continuity v0.4.5 // indirect

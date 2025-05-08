@@ -14,6 +14,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -37,6 +38,14 @@ type Rapidus struct {
 	RedisClient   *redis.Client
 	Cache         cache.Cache
 	Mail          mailer.Mail
+	Server        Server
+}
+
+type Server struct {
+	ServerName string
+	Port       string
+	Secure     bool
+	URL        string
 }
 
 type config struct {
@@ -144,6 +153,17 @@ func (r *Rapidus) New(rootPath string) error {
 		CookieDomain:   r.config.cookie.domain,
 		SessionType:    r.config.sessionType,
 		DBPool:         r.DB.Pool,
+	}
+
+	secure := true
+	if strings.ToLower(os.Getenv("SECURE")) == "false" {
+		secure = false
+	}
+	r.Server = Server{
+		ServerName: os.Getenv("SERVER_NAME"),
+		Port:       os.Getenv("PORT"),
+		Secure:     secure,
+		URL:        os.Getenv("APP_URL"),
 	}
 
 	switch r.config.sessionType {

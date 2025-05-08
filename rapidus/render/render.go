@@ -10,9 +10,9 @@ import (
 func Template(w http.ResponseWriter, r *http.Request, template templ.Component) error {
 
 	// Create a context and set value(s) that will be available to all templates
-	ctx := context.WithValue(context.Background(), "CSRFToken", nosurf.Token(r))
-	ctx = context.WithValue(context.Background(), "Error", "")
-	ctx = context.WithValue(context.Background(), "Flash", "")
+	ctx := context.WithValue(r.Context(), "CSRFToken", nosurf.Token(r))
+	ctx = context.WithValue(ctx, "Error", "")
+	ctx = context.WithValue(ctx, "Flash", "")
 
 	return template.Render(ctx, w)
 }
