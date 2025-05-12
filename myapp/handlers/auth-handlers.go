@@ -168,3 +168,34 @@ func (h *Handlers) ForgotPost(w http.ResponseWriter, r *http.Request) {
 	// redir user
 	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }
+
+func (h *Handlers) ResetPasswordForm(w http.ResponseWriter, r *http.Request) {
+	// get url values
+	email := r.URL.Query().Get("email")
+
+	// validate url
+	theURL := r.RequestURI
+	testURL := fmt.Sprintf("%s%s", h.App.Server.URL, theURL)
+	signer := urlsigner.Signer{
+		Secret: []byte(h.App.EncryptionKey),
+	}
+	valid := signer.VerifyToken(testURL)
+	if !valid {
+		h.App.ErrorLog.Println("Invalid url")
+		h.App.ErrorUnauthorized(w)
+		return
+	}
+
+	// check expiry
+	expired := signer.Expired(testURL, 60)
+	if expired {
+		h.App.ErrorLog.Println("Link expired")
+		h.App.ErrorUnauthorized(w)
+		return
+	}
+
+	// display form
+	encryptedEmail, _ := h.encrypt(email)
+
+	h.render(w, r, views.ResetPassword(encryptedEmail))
+}
