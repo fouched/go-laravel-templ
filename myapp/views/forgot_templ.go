@@ -43,20 +43,20 @@ func Forgot() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Forgot Password</h2><hr><!-- todo error --> <!-- todo flash --> <p>Enter your email address in the form below, and we'll email you a link to reset your password.</p><form method=\"post\" action=\"/users/forgot-password\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Forgot Password</h2><hr><p>Enter your email address in the form below, and we'll email you a link to reset your password.</p><form method=\"post\" action=\"/users/forgot-password\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate><input type=\"hidden\" name=\"csrf_token\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/forgot.templ`, Line: 21, Col: 81}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/forgot.templ`, Line: 20, Col: 81}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"mb-3\"><label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" required=\"\" autocomplete=\"email-new\"></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Send Reset Password Email\"></form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/users/login\">Back</a></div><!-- todo JS -->")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"mb-3\"><label for=\"email\" class=\"form-label\">Email</label> <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" required=\"\" autocomplete=\"email-new\"></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Send Reset Password Email\"></form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/users/login\">Back</a></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

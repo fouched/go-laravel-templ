@@ -43,14 +43,14 @@ func ResetPassword(email string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Forgot Password</h2><hr><!-- todo error --> <!-- todo flash --> <form method=\"post\" name=\"reset_form\" id=\"reset_form\" action=\"/users/reset-password\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate=\"\" onkeydown=\"return event.key != &#39;Enter&#39;;\"><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5 text-center\">Forgot Password</h2><hr><form method=\"post\" name=\"reset_form\" id=\"reset_form\" action=\"/users/reset-password\" class=\"d-block needs-validation\" autocomplete=\"off\" novalidate=\"\"><input type=\"hidden\" name=\"csrf_token\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/reset-password.templ`, Line: 20, Col: 81}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/reset-password.templ`, Line: 18, Col: 81}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -63,13 +63,13 @@ func ResetPassword(email string) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(email)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/reset-password.templ`, Line: 21, Col: 58}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/reset-password.templ`, Line: 19, Col: 58}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"mb-3\"><label for=\"password\" class=\"form-label\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required=\"\" autocomplete=\"password-new\"></div><div class=\"mb-3\"><label for=\"verify-password\" class=\"form-label\">Verify Password</label> <input type=\"password\" class=\"form-control\" id=\"verify-password\" name=\"verify-password\" required=\"\" autocomplete=\"verify-password-new\"></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Reset Password\"></form><hr><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back</a></div><p>&nbsp;</p><!-- todo JS -->")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"mb-3\"><label for=\"password\" class=\"form-label\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required=\"\" autocomplete=\"password-new\"></div><div class=\"mb-3\"><label for=\"verify-password\" class=\"form-label\">Verify Password</label> <input type=\"password\" class=\"form-control\" id=\"verify-password\" name=\"verify-password\" required=\"\" autocomplete=\"verify-password-new\"></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Reset Password\"></form><hr><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back</a></div><p>&nbsp;</p>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

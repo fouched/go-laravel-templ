@@ -69,6 +69,7 @@ func (h *Handlers) DownloadFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) TestCrypto(w http.ResponseWriter, r *http.Request) {
+	defer h.App.LoadTime(time.Now())
 	plainText := "Hello, world"
 
 	encrypted, err := h.encrypt(plainText)
