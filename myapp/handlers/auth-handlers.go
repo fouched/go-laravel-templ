@@ -232,6 +232,6 @@ func (h *Handlers) ResetPasswordPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// redirect
-	h.App.Session.Put(r.Context(), "success", "Password reset. You can now log in.")
+	h.App.Session.Put(r.Context(), "success", "Your password has been reset. You can now log in.")
 	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }
