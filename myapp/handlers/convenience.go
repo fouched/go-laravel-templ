@@ -3,13 +3,13 @@ package handlers
 import (
 	"context"
 	"github.com/a-h/templ"
-	"github.com/fouched/rapidus/render"
 	"github.com/fouched/toolkit/v2"
 	"net/http"
 )
 
 func (h *Handlers) render(w http.ResponseWriter, r *http.Request, tmpl templ.Component) {
-	err := render.Template(w, r, tmpl)
+	//err := render.Template(w, r, tmpl)
+	err := h.App.Render.Template(w, r, tmpl)
 	if err != nil {
 		//TODO: render a default "fail safe" page
 		h.App.ErrorLog.Println("error rendering:", err)

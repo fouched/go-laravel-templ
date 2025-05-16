@@ -69,7 +69,7 @@ func ResetPassword(email string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"mb-3\"><label for=\"password\" class=\"form-label\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required=\"\" autocomplete=\"password-new\"></div><div class=\"mb-3\"><label for=\"verify-password\" class=\"form-label\">Verify Password</label> <input type=\"password\" class=\"form-control\" id=\"verify-password\" name=\"verify-password\" required=\"\" autocomplete=\"verify-password-new\"></div><hr><a href=\"javascript:void(0)\" class=\"btn btn-primary\" onclick=\"val()\">Reset Password</a></form><hr><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back...</a></div><p>&nbsp;</p><!-- todo JS -->")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"mb-3\"><label for=\"password\" class=\"form-label\">Password</label> <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" required=\"\" autocomplete=\"password-new\"></div><div class=\"mb-3\"><label for=\"verify-password\" class=\"form-label\">Verify Password</label> <input type=\"password\" class=\"form-control\" id=\"verify-password\" name=\"verify-password\" required=\"\" autocomplete=\"verify-password-new\"></div><hr><input type=\"submit\" class=\"btn btn-primary\" value=\"Reset Password\"></form><hr><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back</a></div><p>&nbsp;</p><!-- todo JS -->")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

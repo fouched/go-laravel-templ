@@ -6,6 +6,9 @@ import (
 	"github.com/dgraph-io/badger/v4"
 	"github.com/fouched/rapidus/cache"
 	"github.com/fouched/rapidus/mailer"
+	"github.com/fouched/rapidus/render"
+
+	//"github.com/fouched/rapidus/render"
 	"github.com/fouched/rapidus/session"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
@@ -31,6 +34,7 @@ type Rapidus struct {
 	InfoLog       *log.Logger
 	RootPath      string
 	Routes        *chi.Mux
+	Render        render.Render
 	Session       *scs.SessionManager
 	DB            Database
 	config        config // no reason to export this
@@ -178,6 +182,9 @@ func (r *Rapidus) New(rootPath string) error {
 	// encryption key
 	r.EncryptionKey = os.Getenv("KEY")
 
+	// create renderer
+	r.Render = render.Render{Session: r.Session}
+
 	// listen for mail requests
 	go r.Mail.ListenForMail()
 
@@ -237,6 +244,12 @@ func (r *Rapidus) startLoggers() (*log.Logger, *log.Logger) {
 
 	return infoLog, errorLog
 }
+
+//func (r *Rapidus) createRenderer() {
+//	myRenderer := render.Render{Session: r.Session}
+//
+//	r.Render = &myRenderer
+//}
 
 func (r *Rapidus) createMailer() mailer.Mail {
 	port, _ := strconv.Atoi(os.Getenv("SMTP_PORT"))

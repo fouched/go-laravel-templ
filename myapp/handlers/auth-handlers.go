@@ -142,7 +142,7 @@ func (h *Handlers) ForgotPost(w http.ResponseWriter, r *http.Request) {
 		Secret: []byte(h.App.EncryptionKey),
 	}
 	signedLink := sign.GenerateTokenFromString(link)
-	h.App.InfoLog.Println("Signed link is: ", signedLink)
+	//h.App.InfoLog.Println("Signed link is: ", signedLink)
 
 	// email msg
 	var emailData struct {
@@ -169,7 +169,7 @@ func (h *Handlers) ForgotPost(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }
 
-func (h *Handlers) ResetPasswordForm(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) ResetPasswordGet(w http.ResponseWriter, r *http.Request) {
 	// get url values
 	email := r.URL.Query().Get("email")
 
@@ -198,4 +198,39 @@ func (h *Handlers) ResetPasswordForm(w http.ResponseWriter, r *http.Request) {
 	encryptedEmail, _ := h.encrypt(email)
 
 	h.render(w, r, views.ResetPassword(encryptedEmail))
+}
+
+func (h *Handlers) ResetPasswordPost(w http.ResponseWriter, r *http.Request) {
+	// parse form
+	err := r.ParseForm()
+	if err != nil {
+		h.App.Error500(w)
+		return
+	}
+
+	// get and decrypt email
+	email, err := h.decrypt(r.Form.Get("email"))
+	if err != nil {
+		h.App.Error500(w)
+		return
+	}
+
+	// get user
+	var u data.User
+	user, err := u.GetByEmail(email)
+	if err != nil {
+		h.App.Error500(w)
+		return
+	}
+
+	// reset password
+	err = user.ResetPassword(user.ID, r.Form.Get("password"))
+	if err != nil {
+		h.App.Error500(w)
+		return
+	}
+
+	// redirect
+	h.App.Session.Put(r.Context(), "success", "Password reset. You can now log in.")
+	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }
