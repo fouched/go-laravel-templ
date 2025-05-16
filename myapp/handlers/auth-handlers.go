@@ -166,6 +166,7 @@ func (h *Handlers) ForgotPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// redir user
+	h.App.Session.Put(r.Context(), "success", "An email has been sent to your address.")
 	http.Redirect(w, r, "/users/login", http.StatusSeeOther)
 }
 
