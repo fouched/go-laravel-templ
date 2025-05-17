@@ -154,7 +154,7 @@ func (h *Handlers) ForgotPost(w http.ResponseWriter, r *http.Request) {
 		To:       u.Email,
 		From:     "admin@example.com",
 		Subject:  "Password reset",
-		Template: "password-reset",
+		Template: "password_reset",
 		Data:     emailData,
 	}
 

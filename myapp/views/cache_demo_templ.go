@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "myapp/views/layouts"
 
-func CachePageRedis() templ.Component {
+func CachePage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -43,65 +43,65 @@ func CachePageRedis() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5\">Cache Content Redis</h2><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"mt-5\">Cache Content</h2><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 12, Col: 81}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 12, Col: 81}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"mb-3\"><label for=\"cache_name\" class=\"form-label\">Cache Keys</label> <input type=\"text\" class=\"form-control\" id=\"cache_name\" name=\"cache_name\"></div><div class=\"mb-3\"><label for=\"cache_value\" class=\"form-label\">Cache Value</label> <input type=\"text\" class=\"form-control\" id=\"cache_value\" name=\"cache_value\"></div><div id=\"saveOutput\" class=\"alert alert-secondary\">Nothing saved yet...</div><button class=\"btn btn-sm btn-success\" hx-post=\"/cache/redis/save\" hx-target=\"#saveOutput\" hx-swap=\"outerHTML\">Save in cache</button></form><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"mb-3\"><label for=\"cache_name\" class=\"form-label\">Cache Keys</label> <input type=\"text\" class=\"form-control\" id=\"cache_name\" name=\"cache_name\"></div><div class=\"mb-3\"><label for=\"cache_value\" class=\"form-label\">Cache Value</label> <input type=\"text\" class=\"form-control\" id=\"cache_value\" name=\"cache_value\"></div><div id=\"saveOutput\" class=\"alert alert-secondary\">Nothing saved yet...</div><button class=\"btn btn-sm btn-success\" hx-post=\"/cache/save\" hx-target=\"#saveOutput\" hx-swap=\"outerHTML\">Save in cache</button></form><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 32, Col: 81}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 32, Col: 81}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"mb-3\"><label for=\"cache_get\" class=\"form-label\">Get Item From Cache</label> <input type=\"text\" class=\"form-control\" id=\"cache_get\" name=\"cache_get\"></div><div id=\"getOutput\" class=\"alert alert-secondary\">Nothing retrieved yet...</div><button class=\"btn btn-sm btn-primary\" hx-post=\"/cache/redis/get\" hx-target=\"#getOutput\" hx-swap=\"outerHTML\">Get from cache</button></form><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"mb-3\"><label for=\"cache_get\" class=\"form-label\">Get Item From Cache</label> <input type=\"text\" class=\"form-control\" id=\"cache_get\" name=\"cache_get\"></div><div id=\"getOutput\" class=\"alert alert-secondary\">Nothing retrieved yet...</div><button class=\"btn btn-sm btn-primary\" hx-post=\"/cache/get\" hx-target=\"#getOutput\" hx-swap=\"outerHTML\">Get from cache</button></form><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 48, Col: 81}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 48, Col: 81}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"><div class=\"mb-3\"><label for=\"delete\" class=\"form-label\">Delete Item From Cache</label> <input type=\"text\" class=\"form-control\" id=\"cache_delete\" name=\"cache_delete\"></div><div id=\"deleteOutput\" class=\"alert alert-secondary\">Nothing deleted yet...</div><button class=\"btn btn-sm btn-primary\" hx-post=\"/cache/redis/delete\" hx-target=\"#deleteOutput\" hx-swap=\"outerHTML\">Delete from cache</button></form><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"><div class=\"mb-3\"><label for=\"delete\" class=\"form-label\">Delete Item From Cache</label> <input type=\"text\" class=\"form-control\" id=\"cache_delete\" name=\"cache_delete\"></div><div id=\"deleteOutput\" class=\"alert alert-secondary\">Nothing deleted yet...</div><button class=\"btn btn-sm btn-primary\" hx-post=\"/cache/delete\" hx-target=\"#deleteOutput\" hx-swap=\"outerHTML\">Delete from cache</button></form><hr><form><input type=\"hidden\" name=\"csrf_token\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(layouts.CSRFToken(ctx))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 64, Col: 81}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 64, Col: 81}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\"><div id=\"emptyOutput\" class=\"alert alert-secondary\">Cache not emptied yet...</div><button class=\"btn btn-sm btn-primary\" hx-post=\"/cache/redis/empty\" hx-target=\"#emptyOutput\" hx-swap=\"outerHTML\">Empty cache</button></form><hr><form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back</a></div></form><p>&nbsp;</p>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\"><div id=\"emptyOutput\" class=\"alert alert-secondary\">Cache not emptied yet...</div><button class=\"btn btn-sm btn-primary\" hx-post=\"/cache/empty\" hx-target=\"#emptyOutput\" hx-swap=\"outerHTML\">Empty cache</button></form><hr><form><div class=\"text-center\"><a class=\"btn btn-outline-secondary\" href=\"/\">Back</a></div></form><p>&nbsp;</p>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Cache Demo Redis").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Cache Demo").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -109,7 +109,7 @@ func CachePageRedis() templ.Component {
 	})
 }
 
-func CacheSaveRedis(msg string, err error) templ.Component {
+func CacheSave(msg string, err error) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -138,7 +138,7 @@ func CacheSaveRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 87, Col: 60}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 87, Col: 60}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
@@ -156,7 +156,7 @@ func CacheSaveRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 89, Col: 61}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 89, Col: 61}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
@@ -171,7 +171,7 @@ func CacheSaveRedis(msg string, err error) templ.Component {
 	})
 }
 
-func CacheGetRedis(msg string, err error) templ.Component {
+func CacheGet(msg string, err error) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -200,7 +200,7 @@ func CacheGetRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 95, Col: 59}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 95, Col: 59}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -218,7 +218,7 @@ func CacheGetRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 97, Col: 60}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 97, Col: 60}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {
@@ -233,7 +233,7 @@ func CacheGetRedis(msg string, err error) templ.Component {
 	})
 }
 
-func CacheDeleteRedis(msg string, err error) templ.Component {
+func CacheDelete(msg string, err error) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -262,7 +262,7 @@ func CacheDeleteRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var14 string
 			templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 103, Col: 62}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 103, Col: 62}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 			if templ_7745c5c3_Err != nil {
@@ -280,7 +280,7 @@ func CacheDeleteRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var15 string
 			templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 105, Col: 63}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 105, Col: 63}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 			if templ_7745c5c3_Err != nil {
@@ -295,7 +295,7 @@ func CacheDeleteRedis(msg string, err error) templ.Component {
 	})
 }
 
-func CacheEmptyRedis(msg string, err error) templ.Component {
+func CacheEmpty(msg string, err error) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -324,7 +324,7 @@ func CacheEmptyRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var17 string
 			templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 111, Col: 62}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 111, Col: 62}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 			if templ_7745c5c3_Err != nil {
@@ -342,7 +342,7 @@ func CacheEmptyRedis(msg string, err error) templ.Component {
 			var templ_7745c5c3_Var18 string
 			templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache-demo-redis.templ`, Line: 113, Col: 63}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/cache_demo.templ`, Line: 113, Col: 63}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 			if templ_7745c5c3_Err != nil {

@@ -13,7 +13,7 @@ func doAuth() error {
 	upFile := rap.RootPath + "/migrations/" + fileName + ".up.sql"
 	downFile := rap.RootPath + "/migrations/" + fileName + ".down.sql"
 
-	err := copyFileFromTemplate("templates/migrations/auth-tables."+dbType+".sql", upFile)
+	err := copyFileFromTemplate("templates/migrations/auth_tables."+dbType+".sql", upFile)
 	if err != nil {
 		exitGracefully(err)
 	}
@@ -40,13 +40,55 @@ func doAuth() error {
 		exitGracefully(err)
 	}
 
+	err = copyFileFromTemplate("templates/data/remember_token.go.txt", rap.RootPath+"/data/remember_token.go")
+	if err != nil {
+		exitGracefully(err)
+	}
+
 	// copy middleware
 	err = copyFileFromTemplate("templates/middleware/auth.go.txt", rap.RootPath+"/middleware/auth.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFileFromTemplate("templates/middleware/auth-token.go.txt", rap.RootPath+"/middleware/auth-token.go")
+	err = copyFileFromTemplate("templates/middleware/auth_token.go.txt", rap.RootPath+"/middleware/auth_token.go")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	err = copyFileFromTemplate("templates/middleware/remember.go.txt", rap.RootPath+"/middleware/remember.go")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	// copy handlers
+	err = copyFileFromTemplate("templates/handlers/auth_handlers.go.txt", rap.RootPath+"/handlers/auth_handlers.go")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	// copy views
+	err = copyFileFromTemplate("templates/mailer/password_reset.html.tmpl", rap.RootPath+"/mail/mailer/password_reset.html.tmpl")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	err = copyFileFromTemplate("templates/mailer/password_reset.text.tmpl", rap.RootPath+"/mail/mailer/password_reset.text.tmpl")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	err = copyFileFromTemplate("templates/views/forgot.templ", rap.RootPath+"/views/forgot.templ")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	err = copyFileFromTemplate("templates/views/login.templ", rap.RootPath+"/views/login.templ")
+	if err != nil {
+		exitGracefully(err)
+	}
+
+	err = copyFileFromTemplate("templates/views/reset_password.templ", rap.RootPath+"/views/reset_password.templ")
 	if err != nil {
 		exitGracefully(err)
 	}
