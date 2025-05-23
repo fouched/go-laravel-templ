@@ -32,3 +32,4 @@ go.work.sum
 myapp/db-data
 tmp
 
+/rapidus/dist/rapidus
